@@ -23,8 +23,27 @@
 */
 #include "stdafx.h"
 
+int fact(int n)
+{
+	if (n == 0 || n == 1)
+		return 1;
+	else
+		return n*fact(n - 1);
+}
 
 int get_steps(int s)
 {
-	return 0;
+	int count1 = s, count2 = 0,sum=0;
+	if (s == 0)
+		return 0;
+	if (s == 1)
+		return 1;
+
+	for (int i = s; count2 <= s && count1 >=0; i--)
+	{
+		sum = sum + (fact(i) / (fact(count2)*fact(count1)));
+		count1 = count1 - 2;
+		count2++;		
+	}
+	return sum;
 }

@@ -35,9 +35,6 @@
     <ClCompile Include="Steps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CountPairs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Maze.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,5 +47,6 @@
     <ClCompile Include="NSnipers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CountPairs.cpp" />
   </ItemGroup>
 </Project>
