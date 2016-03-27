@@ -54,11 +54,8 @@ int * get_spiral_path(int **input_array, int rows, int columns, int x, int y, in
 	{
 		if (input_array[x][y] == -9999)
 			break;
-		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
 		Arr[i++] = input_array[x][y];
-		//printf("\nArr[%d]=%d", i, Arr[i-1]);
 		input_array[x][y] = -9999;
-		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
 		x++;
 	}
 	printf("\n");
@@ -68,11 +65,8 @@ int * get_spiral_path(int **input_array, int rows, int columns, int x, int y, in
 	{
 		if (input_array[x][y] == -9999)
 			break;
-		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
 		Arr[i++] = input_array[x][y];
-		//printf("\nArr[%d]=%d", i, Arr[i-1]);
 		input_array[x][y] = -9999;
-		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
 		y--;
 	}
 	printf("\n");
@@ -82,11 +76,8 @@ int * get_spiral_path(int **input_array, int rows, int columns, int x, int y, in
 	{
 		if (input_array[x][y] == -9999)
 			break;
-		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
 		Arr[i++] = input_array[x][y];
-		//printf("\nArr[%d]=%d", i, Arr[i-1]);
 		input_array[x][y] = -9999;
-		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
 		x--;
 	}
 	x = x + 1;
