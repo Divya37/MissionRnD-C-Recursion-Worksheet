@@ -34,7 +34,80 @@ Note : Check the function Parameters ,Its a double pointer .
 #include "stdafx.h"
 #include<stdlib.h>
 
+int * get_spiral_path(int **input_array, int rows, int columns, int x, int y, int *Arr, int i)
+{
+	printf("\nrows=%d,columns=%d,x=%d,y=%d\n\n", rows, columns, x, y);
+	if (input_array[x][y] == -9999 || rows <= 0 || columns <= 0)
+		return Arr;
+	while (y < columns)
+	{
+		if (input_array[x][y] == -9999)
+			break;
+		Arr[i++] = input_array[x][y];
+		input_array[x][y] = -9999;
+		y++;
+	}
+	printf("\n");
+	y = y - 1;
+	x = x + 1;
+	while (x < rows)
+	{
+		if (input_array[x][y] == -9999)
+			break;
+		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
+		Arr[i++] = input_array[x][y];
+		//printf("\nArr[%d]=%d", i, Arr[i-1]);
+		input_array[x][y] = -9999;
+		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
+		x++;
+	}
+	printf("\n");
+	x = x - 1;
+	y = y - 1;
+	while (y >= 0 && y<columns && x >= 0 && x<rows)
+	{
+		if (input_array[x][y] == -9999)
+			break;
+		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
+		Arr[i++] = input_array[x][y];
+		//printf("\nArr[%d]=%d", i, Arr[i-1]);
+		input_array[x][y] = -9999;
+		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
+		y--;
+	}
+	printf("\n");
+	y = y + 1;
+	x = x - 1;
+	while (x > 0 && x<rows && y >= 0 && y<columns)
+	{
+		if (input_array[x][y] == -9999)
+			break;
+		//printf("\tinput[%d][%d] = %d", x,y,input_array[x][y]);
+		Arr[i++] = input_array[x][y];
+		//printf("\nArr[%d]=%d", i, Arr[i-1]);
+		input_array[x][y] = -9999;
+		//printf("\tinput[%d][%d] = %d\n", x, y, input_array[x][y]);
+		x--;
+	}
+	x = x + 1;
+	y = y + 1;
+	printf("\n");
+
+	return get_spiral_path(input_array, rows - 1, columns - 1, x, y, Arr, i);
+
+}
+
 int *spiral(int rows, int columns, int **input_array)
 {
-	return NULL;
+
+
+	if (rows <= 0 || columns <= 0 || input_array == NULL)
+		return NULL;
+	int *Arr, i = 0, x = 0, y = 0;
+	Arr = (int *)malloc(sizeof(int)*(rows*columns));
+
+	Arr = get_spiral_path(input_array, rows, columns, x, y, Arr, i);
+
+	return Arr;
+
 }

@@ -35,16 +35,78 @@ more parameters .
 
 #include<stdlib.h>
 
-/*int path_found(int *maze, int rows, int columns, int x1, int y1, int x2, int y2, int sx, int sy)
+int haspath(int *maze, int rows, int columns, int x1, int y1, int x2, int y2)
 {
+	if (x1 == x2 && y1 == y2)
+		return 1;
 
-}*/
+	if (x1 + 1 < rows)
+	{
+
+		if (maze[(x1 + 1)*columns + y1] == 1)
+		{
+			//printf("\nx1=%d,y1=%d**********(recursive)", x1 + 1, y1);
+			maze[(x1 + 1)*columns + y1] = -1;
+			if (haspath(maze, rows, columns, x1 + 1, y1, x2, y2))
+				return 1;
+
+		}
+	}
+	if (y1 + 1 < columns)
+	{
+
+		if (maze[x1*columns + y1 + 1] == 1)
+		{
+			//printf("\nx1=%d,y1=%d**********(recursive)", x1, y1 + 1);
+			maze[x1*columns + y1 + 1] = -1;
+			if (haspath(maze, rows, columns, x1, y1 + 1, x2, y2))
+				return 1;
+
+		}
+	}
+	if (x1 - 1 >= 0)
+	{
+
+		if (maze[(x1 - 1)*columns + y1] == 1)
+		{
+			//printf("\nx1=%d,y1=%d**********(recursive)", x1 - 1, y1);
+			maze[(x1 - 1)*columns + y1] = -1;
+			if (haspath(maze, rows, columns, x1 - 1, y1, x2, y2))
+				return 1;
+
+		}
+	}
+
+	if (y1 - 1 >= 0)
+	{
+
+
+		if (maze[x1*columns + y1 - 1] == 1)
+		{
+			//printf("\nx1=%d,y1=%d**********(recursive)", x1, y1 - 1);
+			maze[x1*columns + y1 - 1] = -1;
+			if (haspath(maze, rows, columns, x1, y1 - 1, x2, y2))
+				return 1;
+
+		}
+	}
+	return 0;
+}
 
 int path_exists(int *maze, int rows, int columns, int x1, int y1, int x2, int y2)
 {
-	if (rows < 0 || columns < 0 || x1<0 || y1<0 || x2<0 || y2<0 || x1>columns || y1>rows || x2>columns || y2>rows)
+	int *inp_maze;
+	inp_maze = (int *)malloc(sizeof(int)*(rows*columns));
+	for (int i = 0; i < (rows*columns); i++)
+	{
+		inp_maze[i] = maze[i];
+		//printf("\ninp_maze[%d] = %d", i, inp_maze[i]);
+	}
+	if (rows <= 0 || columns <= 0 || x1 < 0 || x2 < 0 || y1 < 0 || y2 < 0 ||
+		x1>=rows || y1>=columns || x2>=rows || y2>=columns)
 		return 0;
-	
-	//return path_found(maze, rows, columns, x1, y1, x2, y2, 0, 0);
-	return 1;
+	if (maze[x1*columns + y1] == 0 || maze[x2*columns + y2] == 0)
+		return 0;
+	return haspath(inp_maze, rows, columns, x1, y1, x2, y2);
+		
 }
