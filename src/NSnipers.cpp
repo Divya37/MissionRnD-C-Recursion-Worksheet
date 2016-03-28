@@ -42,7 +42,78 @@ Read :How to access elements in 2D array when its first element address is passe
 P.S: The Above Problem is just a modified version of a popular BackTracking problem .
 */
 
-#include "stdafx.h"
-int solve_nsnipers(int *battlefield, int n){
-	return 0;
+#include<math.h>
+#include<stdlib.h>
+int field[20];
+
+
+int place(int row, int column, int *flag)
+{
+	if (*flag == 1)
+		return 0;
+	for (int i = 1; i <= row - 1; ++i)
+	{
+		if (field[i] == column)
+			return 0;
+		else
+			if (abs(field[i] - column) == abs(i - row))
+				return 0;
+	}
+
+	return 1;
+}
+
+void get_Array(int *matrix, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (field[i + 1] == j + 1)
+				matrix[i*n + j] = 1;
+		}
+
+	}
+}
+
+void sniper(int *matrix, int row, int n, int *flag)
+{
+	for (int column = 1; column <= n; ++column)
+	{
+		if (place(row, column, flag))
+		{
+			field[row] = column;
+			if (row == n && *flag != 1)
+			{
+				*flag = 1;
+				get_Array(matrix, n);
+			}
+			else
+				sniper(matrix, row + 1, n, flag);
+		}
+	}
+}
+int solve_nsnipers(int *battlefield, int n)
+{
+	int flag = 0;
+	if (n < 0 || battlefield == NULL)
+		return 0;
+	int **new_field;
+	new_field = (int **)malloc(sizeof(int *)*n);
+	for (int i = 0; i < n; i++)
+	{
+		new_field[i] = (int *)malloc(sizeof(int)*n);
+		for (int j = 0; j < n; j++)
+		{
+			new_field[i][j] = 0;
+		}
+	}
+
+	sniper(battlefield, 1, n, &flag);
+
+	int i = 0;
+	for (int j = 0; j < n; j++)
+		if (new_field[i][j] != battlefield[j])
+				return 1;			
+	return 0;	
 }
