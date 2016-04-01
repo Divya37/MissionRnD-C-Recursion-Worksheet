@@ -98,10 +98,8 @@ int path_exists(int *maze, int rows, int columns, int x1, int y1, int x2, int y2
 	int *inp_maze;
 	inp_maze = (int *)malloc(sizeof(int)*(rows*columns));
 	for (int i = 0; i < (rows*columns); i++)
-	{
 		inp_maze[i] = maze[i];
-		//printf("\ninp_maze[%d] = %d", i, inp_maze[i]);
-	}
+
 	if (rows <= 0 || columns <= 0 || x1 < 0 || x2 < 0 || y1 < 0 || y2 < 0 ||
 		x1>=rows || y1>=columns || x2>=rows || y2>=columns)
 		return 0;

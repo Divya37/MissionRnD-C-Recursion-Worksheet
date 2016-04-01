@@ -98,22 +98,12 @@ int solve_nsnipers(int *battlefield, int n)
 	int flag = 0;
 	if (n < 0 || battlefield == NULL)
 		return 0;
-	int **new_field;
-	new_field = (int **)malloc(sizeof(int *)*n);
-	for (int i = 0; i < n; i++)
-	{
-		new_field[i] = (int *)malloc(sizeof(int)*n);
-		for (int j = 0; j < n; j++)
-		{
-			new_field[i][j] = 0;
-		}
-	}
-
+	
 	sniper(battlefield, 1, n, &flag);
 
 	int i = 0;
 	for (int j = 0; j < n; j++)
-		if (new_field[i][j] != battlefield[j])
+		if (battlefield[j]!=0)
 				return 1;			
 	return 0;	
 }
