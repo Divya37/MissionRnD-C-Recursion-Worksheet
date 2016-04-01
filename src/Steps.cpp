@@ -31,19 +31,14 @@ int fact(int n)
 		return n*fact(n - 1);
 }
 
+int steps_count(int s, int count1, int count2)
+{
+	if (count1 < 0 && count2 > s)
+		return 0;
+	return (fact(s) / (fact(count2)*fact(count1))) + steps_count(s - 1, count1 - 2, count2 + 1);
+}
+
 int get_steps(int s)
 {
-	int count1 = s, count2 = 0,sum=0;
-	if (s == 0)
-		return 0;
-	if (s == 1)
-		return 1;
-
-	for (int i = s; count2 <= s && count1 >=0; i--)
-	{
-		sum = sum + (fact(i) / (fact(count2)*fact(count1)));
-		count1 = count1 - 2;
-		count2++;		
-	}
-	return sum;
+	return steps_count(s, s, 0);
 }
